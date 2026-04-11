@@ -1,0 +1,11 @@
+{% extends "rest_framework/base.html" %}
+
+{% block userlinks %}
+    {% if user.is_authenticated %}
+        {{ block.super }}
+    {% else %}
+        <a href="{% url 'login' %}">Log in</a>
+        /
+        <a href="{% url 'register' %}">Register</a>
+    {% endif %}
+{% endblock %}
