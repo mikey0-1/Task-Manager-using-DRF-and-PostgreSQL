@@ -28,6 +28,7 @@ env = environ.Env(
 )
 
 environ.Env.read_env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = env("SECRET_KEY")
 
@@ -61,7 +62,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
-        
+
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -112,7 +113,7 @@ WSGI_APPLICATION = 'TaskManagerAPI.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db('DATABASE_URL'),
+    'default': env.db('DATABASE_URL', default='sqlite:///db.sqlite3'),
 }
 
 
@@ -158,3 +159,7 @@ STATIC_ROOT = BASE_DIR / 'static'
 CSRF_TRUSTED_ORIGINS = [
     "https://*.onrender.com",
 ]
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+

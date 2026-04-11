@@ -1,0 +1,29 @@
+<h2>My Tasks</h2>
+
+<form method="POST">
+  {% csrf_token %}
+  <input name="title" placeholder="Title">
+  <textarea name="description"></textarea>
+  <button type="submit">Add</button>
+</form>
+
+<hr>
+
+<!-- FILTERS -->
+<form method="GET">
+  {{ filter.form.as_p }}
+  <button type="submit">Apply Filters</button>
+</form>
+
+<hr>
+
+<ul>
+  {% for task in tasks %}
+    <li>
+      <b>{{ task.title }}</b> - {{ task.description }} -
+      {{ task.status }} - {{ task.date }} - {{ task.due_date }}
+    </li>
+  {% endfor %}
+</ul>
+
+<a href="/logout/">Logout</a>
